@@ -40,50 +40,70 @@ const Materials = require('Materials');
 // Locate the plane in the Scene
 //const plane = Scene.root.find('plane0');
 
-const plant = Scene.root.find('large_plant');
-const plant1 = Scene.root.find('medium_plant');
-const plant2 = Scene.root.find('small_plant');
 
 
 
-const texture0 = Textures.get('one');
-const texture1 = Textures.get('two');
-const texture2 = Textures.get('small_plant_icon');
+
+Promise.all([
 
 
+	Textures.findFirst('one'),
+	Textures.findFirst('two'),
+	Textures.findFirst('small_plant_icon'),
+	Scene.root.findFirst('large_plant'),
+	Scene.root.findFirst('medium_plant'),
+	Scene.root.findFirst('small_plant')
 
-const picker = NativeUI.picker; 
+	]).then(function(results){
+		const texture0 = results[0];
+		const texture1 = results[1];
+		const texture2 = results[2];
+		const plant = results[3];
+		const plant1 = results[4];
+		const plant2 = results[5];
 
-const index = 0;
+		
 
-const configuration = { 
-	selectedIndex: index, 
-	items: [ 
-	{image_texture: texture0}, 
-	{image_texture: texture1}, 
-	{image_texture: texture2}
-	]
-};
+		const picker = NativeUI.picker;
 
-picker.configure(configuration);
-picker.visible = true;
-picker.selectedIndex.monitor().subscribe(function(index) {
+		const index = 0;
 
-	if(index.newValue == 0){
-		plant.hidden = false;
-		plan1.hidden = true;
-		plant2.hidden = true;
+		const configuration = {
+
+			selectedIndex: index,
+			items: [
+			{image_texture: texture0},
+			{image_texture: texture1},
+			{image_texture: texture2}
+
+			]
+
+		};
+
+		picker.configure(configuration);
+		picker.visible = true;
+
+		picker.selectedIndex.monitor().subscribe(function(index) {
+			if(index.newValue == 0){
+				plant.hidden = false;
+				plan1.hidden = true;
+				plant2.hidden = true;
 
 
-	}else if (index.newValue == 1) {
-		plant.hidden = true;
-		plant1.hidden = false;
-		plant2.hidden = true;
+			}else if (index.newValue == 1) {
+				plant.hidden = true;
+				plant1.hidden = false;
+				plant2.hidden = true;
 
-	}else if (index.newValue == 2) {
-		plant.hidden = true;
-		plant1.hidden = true;
-		plant2.hidden = false;
+			}else if (index.newValue == 2) {
+				plant.hidden = true;
+				plant1.hidden = true;
+				plant2.hidden = false;
 
-	}
-});
+			}
+
+
+		}); 
+	});  
+
+
