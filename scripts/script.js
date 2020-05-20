@@ -86,7 +86,7 @@ Promise.all([
 		picker.selectedIndex.monitor().subscribe(function(index) {
 			if(index.newValue == 0){
 				plant.hidden = false;
-				plan1.hidden = true;
+				plant1.hidden = true;
 				plant2.hidden = true;
 
 
