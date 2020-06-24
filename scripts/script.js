@@ -100,6 +100,11 @@ Promise.all([
 				plant1.hidden = true;
 				plant2.hidden = false;
 
+			}else{
+				plant.hidden = false;
+				plant1.hidden = true;
+				plant2.hidden = true;
+
 			}
 
 
