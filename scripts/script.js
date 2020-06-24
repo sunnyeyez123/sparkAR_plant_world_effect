@@ -49,7 +49,7 @@ Promise.all([
 
 	Textures.findFirst('one'),
 	Textures.findFirst('two'),
-	Textures.findFirst('small_plant_icon'),
+	Textures.findFirst('three'),
 	Scene.root.findFirst('large_plant'),
 	Scene.root.findFirst('medium_plant'),
 	Scene.root.findFirst('small_plant')
